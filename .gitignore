@@ -1,0 +1,8 @@
+# 发行版才有的内容：自带 Electron 与动作包（动画、配音）
+runtime/
+pet/
+node_modules/
+
+# 本机生成的文件
+*.log
+.npm-cache/

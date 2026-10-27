@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>月下 · 状态</title>
+<link rel="stylesheet" href="./status.css">
+<body>
+<div class="panel" id="panel">
+  <header class="head">
+    <div class="slider" id="slider" role="tablist" aria-label="选择 Codex 或 DSH">
+      <i class="thumb"></i>
+      <button data-source="codex" role="tab">Codex</button>
+      <button data-source="dsh" role="tab">DSH</button>
+    </div>
+    <span id="count" class="count">0</span>
+    <div class="tools">
+      <button id="refresh" title="刷新"><svg viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 3v3h-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <button id="chat" title="和月下聊天 / 派活"><svg viewBox="0 0 16 16"><path d="M2.5 3h11v7.5H7l-3 2.5v-2.5H2.5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></button>
+      <button id="console" title="月下控制台（设置）"><svg viewBox="0 0 16 16"><path d="M3 4.5h10M3 8h7M3 11.5h5M12 10l2 1.5-2 1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </header>
+  <div class="lines" id="lines"></div>
+  <div class="body">
+    <!-- Codex：5 小时 / 每周剩余额度 -->
+    <section class="quota" id="codex-quota">
+      <div class="q" id="q5"><div class="qh"><span>5h剩余</span><b>—</b></div><i><u></u></i><small></small></div>
+      <div class="q" id="qw"><div class="qh"><span>周剩余</span><b>—</b></div><i><u></u></i><small></small></div>
+    </section>
+    <!-- DSH：DeepSeek 账户余额 -->
+    <section class="quota money" id="dsh-money" hidden>
+      <div class="qh"><span>DeepSeek 余额</span></div>
+      <b class="big" id="balance">—</b>
+      <div class="split"><span>充值 <b id="topped">—</b></span><span>赠送 <b id="granted">—</b></span></div>
+      <small id="balance-note"></small>
+    </section>
+    <section class="tokens">
+      <nav class="ranges" id="ranges"><button data-range="all">全部</button><button data-range="month">30天</button><button data-range="week" class="on">7天</button></nav>
+      <div class="sum" id="sum">—</div>
+      <div class="bars" id="bars"></div>
+      <div class="axis"><span id="from"></span><span id="to"></span></div>
+    </section>
+  </div>
+  <footer class="foot"><span>今日 Token</span><b id="today">—</b><button id="hours">24h ›</button></footer>
+</div>
+<script type="module" src="./status.js"></script>
+</body>
+</html>

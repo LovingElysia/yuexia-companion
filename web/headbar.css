@@ -1,0 +1,53 @@
+/* 月下头顶状态栏：照白龙的状态岛排版（左额度圆环、中间状态胶囊、右侧圆环），换成月下的酒红与金色 */
+:root {
+  color-scheme: dark;
+  --surface: #fbf5f2;
+  --surface-hover: #f4ebe8;
+  --ink: #3a2530;
+  --track: #ecdfe0;
+  --accent: #a3364f;
+  --gold: #c9995f;
+  --low: #d0475f;
+  --island: #2a1824;
+  --on-island: #f8eef0;
+  --dots: #e3c49c;
+  font: 12px/1 "Microsoft YaHei UI", "Microsoft YaHei", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; user-select: none; }
+button { font: inherit; border: 0; padding: 0; cursor: pointer; }
+
+.bar { height: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+/* 圆环：270° 开口在下方，与白龙相同 */
+.dial { position: relative; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); color: var(--ink);
+  box-shadow: 0 2px 6px rgba(20, 6, 14, .35); flex: none; transition: background .15s; }
+.dial:hover { background: var(--surface-hover); }
+.dial svg { position: absolute; inset: 0; width: 40px; height: 40px; transform: rotate(135deg); }
+.dial circle { fill: none; stroke-width: 4.6; stroke-linecap: round; }
+.dial .track { stroke: var(--track); }
+.dial .value { stroke: var(--accent); transition: stroke-dasharray .5s cubic-bezier(.3, .7, .3, 1); }
+.dial.money .value { stroke: var(--gold); }
+.dial.low .value { stroke: var(--low); }
+.dial.low .num { color: var(--low); }
+.num { position: absolute; inset: 0; display: flex; align-items: baseline; justify-content: center; padding-top: 12.5px; font-weight: 700; letter-spacing: -.3px; }
+.num b { font-size: 13.5px; font-weight: 700; }
+.num small { font-size: 8.5px; font-weight: 700; }
+/* 余额最多是「¥0.15」这样 4 位，比百分比宽：字号收小、字距收紧，保证落在圆环内 */
+.dial.money .num { letter-spacing: -.6px; }
+.dial.money .num b { font-size: 11px; }
+.dial.money .num small { font-size: 7.5px; margin-right: .6px; }
+
+/* 状态胶囊 */
+.pill { width: 132px; height: 40px; border-radius: 22px; background: var(--island); border: 1px solid #4a3040; color: var(--on-island);
+  display: flex; align-items: center; gap: 6px; padding: 0 12px; font-size: 12.5px; font-weight: 600; box-shadow: 0 2px 6px rgba(20, 6, 14, .35); flex: none; }
+.pill:hover { background: #331f2c; }
+.pill span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.dots { width: 16px; height: 16px; flex: none; fill: none; stroke: var(--dots); stroke-width: 1.5; }
+.pill.busy .dots circle { animation: pulse 1.2s ease-in-out infinite; }
+.pill.busy .dots circle:nth-child(2) { animation-delay: .2s; }
+.pill.busy .dots circle:nth-child(3) { animation-delay: .4s; }
+.pill.need { border-color: var(--low); }
+.pill.need .dots { stroke: var(--low); }
+.pill.done .dots { stroke: #9fd0a8; }
+@keyframes pulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; fill: var(--dots); } }

@@ -1,0 +1,17 @@
+{
+  "name": "yuexia-companion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "大月下桌宠陪伴版：GPT-SoVITS 语音、Codex / DeepSeek Harness 联动与专属控制台",
+  "main": "desktop.cjs",
+  "scripts": {
+    "start": "electron desktop.cjs",
+    "console": "electron desktop.cjs --console",
+    "bundle": "node tools/bundle.cjs all",
+    "test": "node --test --test-timeout=30000 test/core.test.cjs test/server.test.cjs"
+  },
+  "devDependencies": {
+    "electron": "43.3.0"
+  },
+  "license": "MIT"
+}

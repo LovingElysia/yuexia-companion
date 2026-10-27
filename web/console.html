@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>月下 · 控制台</title>
+<link rel="stylesheet" href="./console.css">
+<body>
+<header class="titlebar">
+  <div class="brand">
+    <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 4.6A8 8 0 1 0 19.4 15 6.5 6.5 0 0 1 15.5 4.6z"/></svg>
+    <span class="brand-name">月下</span><span class="brand-sub">Lunar Vow · 控制台</span>
+  </div>
+  <div class="win-buttons">
+    <button id="pin" class="win" title="置顶" aria-label="置顶"><svg viewBox="0 0 16 16"><path d="M6 2h4l-.5 4 2.5 2v1H8.6L8 14l-.6-5H4V8l2.5-2z"/></svg></button>
+    <button id="minimize" class="win" title="最小化" aria-label="最小化"><svg viewBox="0 0 16 16"><path d="M3 8.5h10v1H3z"/></svg></button>
+    <button id="maximize" class="win" title="最大化" aria-label="最大化"><svg viewBox="0 0 16 16"><path d="M3.5 3.5h9v9h-9z" fill="none" stroke="currentColor"/></svg></button>
+    <button id="close" class="win close" title="关闭控制台（月下继续留在桌面）" aria-label="关闭"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.3"/></svg></button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="side">
+    <div class="portrait">
+      <div class="halo"></div>
+      <img src="./img/portrait.png" alt="月下">
+      <div class="presence"><i id="presence-dot"></i><span id="presence">正在连接…</span></div>
+    </div>
+    <div class="nameplate">
+      <div class="name">月下</div>
+      <div class="title">月下誓约 · 予爱以心</div>
+    </div>
+    <nav class="nav">
+      <button data-tab="home"><svg viewBox="0 0 20 20"><path d="M10 3l7 6v8h-5v-5H8v5H3V9z"/></svg>陪伴</button>
+      <button data-card><svg viewBox="0 0 20 20"><path d="M3 4h14v9H8l-4 3v-3H3z"/></svg>聊天 / 派活 ↗</button>
+      <button data-tab="link"><svg viewBox="0 0 20 20"><path d="M8 12l4-4M7 9L5 11a2.8 2.8 0 0 0 4 4l2-2M13 11l2-2a2.8 2.8 0 0 0-4-4L9 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>联动</button>
+      <button data-tab="voice"><svg viewBox="0 0 20 20"><path d="M4 8h3l4-3v10l-4-3H4zM14 7a4 4 0 0 1 0 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>语音</button>
+      <button data-tab="persona"><svg viewBox="0 0 20 20"><path d="M10 3a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7zM3.5 17c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5z"/></svg>人设与模型</button>
+      <button data-tab="about"><svg viewBox="0 0 20 20"><path d="M10 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm-.8 6v5h1.6V9zm0-3v1.6h1.6V6z"/></svg>关于</button>
+    </nav>
+    <div class="side-foot"><span id="link-chip" class="chip">独立陪伴</span><span id="voice-chip" class="chip">语音</span></div>
+  </aside>
+
+  <main class="main">
+    <!-- 陪伴 -->
+    <section class="tab" data-panel="home">
+      <div class="hero">
+        <div class="hero-text">
+          <div class="eyebrow">今天也在你身边</div>
+          <h1 id="greeting">晚上好，人类</h1>
+          <p class="quote" id="last-line">「我在这里，等你回来。」</p>
+          <div class="actions">
+            <button class="primary" data-card>和她说话 / 派活</button>
+            <button id="say-greeting">让她打个招呼</button>
+            <button data-go="link">设置联动</button>
+          </div>
+        </div>
+        <svg class="hero-moon" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><radialGradient id="rm" cx="40%" cy="38%" r="65%"><stop offset="0" stop-color="#e2546c"/><stop offset=".65" stop-color="#8f2a40"/><stop offset="1" stop-color="#4a1424"/></radialGradient></defs>
+          <circle cx="100" cy="100" r="78" fill="url(#rm)"/>
+          <path d="M60 70c4-6 8-9 12-9-3 5-3 8 0 11 8-7 18-10 32-8-7 3-12 8-14 15-5-2-10-2-12 3-3 7-7 12-12 16-5-4-9-9-12-16-2-5-7-5-12-3-2-7-7-12-14-15 14-2 24 1 32 8z" transform="translate(28 18) scale(.9)" fill="#1b0d15" opacity=".75"/>
+        </svg>
+      </div>
+      <div class="grid3">
+        <div class="card stat"><div class="stat-label">联动</div><div class="stat-value" id="home-link">—</div><div class="stat-note" id="home-link-note"></div></div>
+        <div class="card stat"><div class="stat-label">语音</div><div class="stat-value" id="home-voice">—</div><div class="stat-note" id="home-voice-note"></div></div>
+        <div class="card stat"><div class="stat-label">对话</div><div class="stat-value" id="home-chat">—</div><div class="stat-note" id="home-chat-note"></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>月下最近说过的话</h2><span class="hint">气泡与语音的实时记录</span></div>
+        <ol class="timeline" id="timeline"><li class="empty">还没有说话。</li></ol>
+      </div>
+    </section>
+
+    <!-- 联动 -->
+    <section class="tab" data-panel="link">
+      <h2>接入方式</h2>
+      <p class="lead">月下会跟着你选的工具一起工作：开始任务时打招呼、完成时提醒你、出错时安慰你。三种方式任选其一。</p>
+      <div class="choices" id="link-choices">
+        <label class="choice"><input type="radio" name="link" value="none"><div><b>独立陪伴</b><span>只陪你聊天和待在桌面上，不读取任何工作状态。</span></div></label>
+        <label class="choice"><input type="radio" name="link" value="codex"><div><b>Codex</b><span>只读本机 Codex 会话日志（与白龙桌宠同一思路），跟随思考、编辑、运行命令与完成。</span></div></label>
+        <label class="choice"><input type="radio" name="link" value="dsh"><div><b>DeepSeek Harness</b><span>只读本机 DSH 会话日志，跟随思考、工具、等待批准与完成。不需要装任何插件。</span></div></label>
+      </div>
+
+      <div class="card" data-show-link="codex">
+        <div class="card-head"><h2>Codex</h2><span class="badge" id="codex-badge">—</span></div>
+        <div class="field"><label>Codex 数据目录</label><input id="codex-home" placeholder="留空自动使用 %USERPROFILE%\.codex"><span class="hint" id="codex-home-hint"></span></div>
+        <h3>最近的会话</h3>
+        <ul class="sessions" id="codex-sessions"><li class="empty">还没有读到会话。</li></ul>
+        <p class="hint">只读取生命周期和工具名称，不读取推理过程与工具输出。等待批准的提醒需要日志里出现批准请求；Codex 桌面端的实时通道暂未接入。</p>
+      </div>
+
+      <div class="card" data-show-link="dsh">
+        <div class="card-head"><h2>DeepSeek Harness</h2><span class="badge" id="dsh-badge">—</span></div>
+        <div class="field"><label>DSH 数据目录</label><input id="dsh-home" placeholder="留空自动使用 %USERPROFILE%\.dsh"><span class="hint" id="dsh-home-hint"></span></div>
+        <h3>最近的会话</h3>
+        <ul class="sessions" id="dsh-sessions"><li class="empty">还没有读到会话。</li></ul>
+        <p class="hint">直接读取 DSH 写在本机的会话日志（sessions\…\session.v4.jsonl.zstd），只取生命周期、会话标题和工具名称，不读取推理、工具参数与输出；子代理会话不提醒。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>让月下派活</h2><span class="hint">在月下卡片里切到 Codex 或 DSH，你的话就会作为任务交给它们</span></div>
+        <div class="field inline"><label>Codex 任务目录</label><input id="codex-workdir" placeholder="在月下卡片里点「选择任务目录」，或直接填写"></div>
+        <div class="field inline"><label>Codex 权限</label><select id="codex-sandbox"><option value="read-only">只读（只查看，不改文件）</option><option value="workspace-write">可修改任务目录内的文件（推荐）</option><option value="danger-full-access">完全访问（危险）</option></select><span class="hint">超出权限的操作会在卡片里请你允许或拒绝</span></div>
+        <div class="kv"><span>Codex 程序</span><code id="codex-exe">—</code></div>
+        <div class="field inline"><label>DSH 任务目录</label><input id="dsh-workdir" placeholder="在月下卡片里选择，或直接填写"></div>
+        <div class="field inline"><label>DSH 程序</label><input id="dsh-app" placeholder="留空自动查找 DeepSeek Harness.exe"></div>
+        <p class="hint">Codex 用你本机登录的 Codex 账号额度（不需要 API 密钥），任务会出现在 Codex 的对话列表里。DSH 用它的无头模式执行，需要「人设与模型」里保存的 DeepSeek 密钥，任务会出现在 DSH 的会话里。</p>
+      </div>
+
+      <div class="card" data-show-link="work">
+        <div class="card-head"><h2>提醒方式</h2><span class="hint">Codex 与 DeepSeek Harness 共用</span></div>
+        <div class="toggles">
+          <label class="toggle"><input type="checkbox" data-setting="work.speakStart"><span></span>开始任务时说一句</label>
+          <label class="toggle"><input type="checkbox" data-setting="work.speakComplete"><span></span>完成时提醒</label>
+          <label class="toggle"><input type="checkbox" data-setting="work.speakAbort"><span></span>中断或出错时安慰</label>
+          <label class="toggle"><input type="checkbox" data-setting="work.showTitle"><span></span>气泡里显示会话标题</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 语音 -->
+    <section class="tab" data-panel="voice">
+      <div class="card">
+        <div class="card-head"><h2>大月下音色</h2><span class="badge" id="voice-badge">—</span></div>
+        <p class="lead">使用本机训练好的 GPT-SoVITS v2Pro 大月下音色（yuexia）。CPU 合成约为语音时长的两倍，回复越短出声越快；固定的提醒台词合成一次后会缓存。</p>
+        <div class="row wrap">
+          <button id="voice-start" class="primary">启动语音服务</button>
+          <button id="voice-refresh">重新检测</button>
+          <button id="voice-stop" class="ghost">停止（仅限由月下启动的服务）</button>
+          <span class="hint" id="voice-detail"></span>
+        </div>
+        <div class="toggles">
+          <label class="toggle"><input type="checkbox" data-setting="voice.enabled"><span></span>开启语音</label>
+          <label class="toggle"><input type="checkbox" data-setting="voice.autoStart"><span></span>需要时自动启动语音服务</label>
+          <label class="toggle"><input type="checkbox" data-setting="voice.speakChat"><span></span>朗读对话回复</label>
+          <label class="toggle"><input type="checkbox" data-setting="voice.speakWork"><span></span>朗读工作提醒与问候</label>
+          <label class="toggle"><input type="checkbox" data-setting="voice.idleOnly"><span></span>只在待机时出声（不压过动作配音）</label>
+          <label class="toggle"><input type="checkbox" data-setting="voice.stream"><span></span>用显卡合成时边合成边播放（流式）</label>
+          <label class="toggle"><input type="checkbox" data-setting="greeting"><span></span>启动时问候</label>
+          <label class="toggle"><input type="checkbox" data-setting="autoPlay"><span></span>自动播放动作（待机时偶尔自己表演）</label>
+        </div>
+        <div class="sliders">
+          <label>语速 <output id="speed-out"></output><input type="range" min="0.7" max="1.3" step="0.02" data-setting="voice.speed" data-number></label>
+          <label>音量 <output id="volume-out"></output><input type="range" min="0" max="1" step="0.05" data-setting="voice.volume" data-number></label>
+        </div>
+        <div class="field inline"><label>合成设备</label><select id="voice-device"><option value="auto">自动（有可用的 NVIDIA 显卡就用 GPU）</option><option value="cuda">优先显卡</option><option value="cpu">始终用 CPU</option></select><span class="hint" id="device-reason"></span></div>
+        <div class="field inline"><label>音色档案</label><select id="voice-profile"></select><span class="hint">yuexia = 种子 1234（默认），yuexia-s3407 = 种子 3407</span></div>
+        <details class="advanced"><summary>高级</summary>
+          <div class="field"><label>语音服务地址</label><input id="voice-url" placeholder="http://127.0.0.1:9880"></div>
+          <div class="field"><label>GPT-SoVITS 安装目录</label><input id="voice-root"></div>
+        </details>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>试听语气</h2><span class="hint">点一下，月下会在桌面上说出来</span></div>
+        <div class="emotions" id="emotions"></div>
+        <form class="field inline" id="say-form"><label>自定义台词</label><input id="say-text" maxlength="200" placeholder="例如：今晚的月亮很好看哦。"><select id="say-emotion"></select><button class="primary" type="submit">说出来</button></form>
+      </div>
+    </section>
+
+    <!-- 人设与模型 -->
+    <section class="tab" data-panel="persona">
+      <div class="card">
+        <div class="card-head"><h2>对话模型</h2><span class="badge" id="chat-badge">—</span></div>
+        <div class="choices compact" id="provider-choices">
+          <label class="choice"><input type="radio" name="provider" value="openai"><div><b>OpenAI 兼容接口</b><span>默认 DeepSeek 官方地址，也可填其他兼容服务。</span></div></label>
+          <label class="choice"><input type="radio" name="provider" value="off"><div><b>关闭对话</b><span>月下只做提醒和陪伴。</span></div></label>
+        </div>
+        <div data-show-provider="openai">
+          <div class="field"><label>接口地址</label><input id="chat-base" placeholder="https://api.deepseek.com"></div>
+          <div class="field inline"><label>模型</label><input id="chat-model" list="model-list" placeholder="例如 deepseek-chat"><datalist id="model-list"></datalist><button id="load-models">获取模型列表</button></div>
+          <div class="field inline"><label>API 密钥</label><input id="chat-key" type="password" autocomplete="off" placeholder="sk-…"><button id="save-key" class="primary">保存密钥</button><button id="clear-key" class="ghost">清除</button><span class="hint" id="key-hint"></span></div>
+          <p class="hint">密钥只保存在本机 <code id="data-dir"></code> 的 settings.json 里，不会出现在页面上。</p>
+        </div>
+        <div class="field inline"><label>记忆轮数</label><input id="chat-rounds" type="number" min="0" max="30"><span class="hint">每次对话带上最近几轮记录</span></div>
+      </div>
+      <div class="card" data-show-provider="openai">
+        <div class="card-head"><h2>月下的人设</h2><div class="row"><button id="reset-persona" class="ghost">恢复默认</button><button id="save-persona" class="primary">保存人设</button></div></div>
+        <textarea id="persona" rows="12" spellcheck="false"></textarea>
+        <p class="hint">回复开头的语气标签（如 [shy]）用于挑选对应情绪的参考音，不会显示或读出来。时间会自动附在人设后面。</p>
+      </div>
+    </section>
+
+    <!-- 关于 -->
+    <section class="tab" data-panel="about">
+      <div class="card">
+        <div class="card-head"><h2>月下陪伴版</h2><span class="badge" id="version">—</span></div>
+        <div class="kv"><span>动作包</span><b id="base-name">—</b></div>
+        <div class="kv"><span>动作包位置</span><code id="base-path">—</code></div>
+        <div class="kv"><span>数据目录</span><code id="about-data">—</code></div>
+        <div class="field"><label>使用其他月下动作包</label><input id="base-input" placeholder="包含 manifest.json 与 preview.html 的目录"><span class="hint">修改后重新启动桌宠生效。</span></div>
+        <p class="hint">动作与配音来自已交付的月下动作包，本陪伴版只读取它们，不修改原包。语音服务、对话记录与设置都只在本机。</p>
+      </div>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast" role="status"></div>
+<script type="module" src="./console.js"></script>
+</body>
+</html>

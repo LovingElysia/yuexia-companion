@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>月下 · 头顶状态栏</title>
+<link rel="stylesheet" href="./headbar.css">
+<body>
+<div class="bar">
+  <button class="dial" id="codex" aria-label="Codex 额度">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle class="track" cx="20" cy="20" r="16.6"/><circle class="value" cx="20" cy="20" r="16.6"/></svg>
+    <span class="num"><b>—</b><small></small></span>
+  </button>
+  <button class="pill" id="pill" aria-label="月下状态">
+    <svg class="dots" viewBox="0 0 16 16" aria-hidden="true"><circle cx="4.6" cy="5.4" r="2.4"/><circle cx="11.4" cy="5.4" r="2.4"/><circle cx="8" cy="11.4" r="2.4"/></svg>
+    <span id="status">待命</span>
+  </button>
+  <button class="dial money" id="dsh" aria-label="DeepSeek 余额">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle class="track" cx="20" cy="20" r="16.6"/><circle class="value" cx="20" cy="20" r="16.6"/></svg>
+    <span class="num"><small></small><b>—</b></span>
+  </button>
+</div>
+<script type="module" src="./headbar.js"></script>
+</body>
+</html>

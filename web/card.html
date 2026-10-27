@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>月下</title>
+<link rel="stylesheet" href="./card.css">
+<body>
+<div class="card" id="card">
+  <header class="head">
+    <div class="who"><span class="avatar"></span><b>月下</b><i id="dot" class="dot"></i></div>
+    <nav class="seg" id="targets" role="tablist">
+      <button data-target="chat" role="tab">闲聊</button>
+      <button data-target="codex" role="tab">Codex</button>
+      <button data-target="dsh" role="tab">DSH</button>
+    </nav>
+    <div class="tools">
+      <button id="refresh" class="icon" title="刷新额度"><svg viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 3v3h-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+      <button id="console" class="icon" title="月下控制台（设置）"><svg viewBox="0 0 16 16"><path d="M8 5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM7 1h2l.4 1.8 1.6.7 1.6-1 1.4 1.4-1 1.6.7 1.6L15 7v2l-1.8.4-.7 1.6 1 1.6-1.4 1.4-1.6-1-1.6.7L9 15H7l-.4-1.8-1.6-.7-1.6 1-1.4-1.4 1-1.6-.7-1.6L1 9V7l1.8-.4.7-1.6-1-1.6 1.4-1.4 1.6 1 1.6-.7z" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></button>
+      <button id="close" class="icon" title="收起"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.4"/></svg></button>
+    </div>
+  </header>
+
+  <section class="status" id="status">
+    <div class="sessions" id="sessions"></div>
+    <div class="meters">
+      <div class="meter" id="m5h"><span class="k">5h剩余</span><b>—</b><i><u></u></i><small></small></div>
+      <div class="meter" id="mweek"><span class="k">周剩余</span><b>—</b><i><u></u></i><small></small></div>
+      <div class="meter money" id="mds"><span class="k">DeepSeek</span><b>—</b><small></small></div>
+    </div>
+  </section>
+
+  <div class="convbar">
+    <button id="convs" class="conv-title" title="会话列表：切换、改名、删除"><svg viewBox="0 0 16 16"><path d="M2.5 4h11M2.5 8h11M2.5 12h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span id="conv-name">新的闲聊</span><i>▾</i></button>
+    <button id="new-conv" class="mini" title="新建会话">＋ 新建</button>
+  </div>
+  <div class="taskbar" id="taskbar">
+    <button id="folder" class="folder" title="选择任务目录"><svg viewBox="0 0 16 16"><path d="M1.5 4h5l1.2 1.5h6.8v7.5h-13z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span id="folder-name">选择任务目录</span></button>
+    <button id="open-codex" class="mini" title="在 Codex 里打开这个对话（不用重启 Codex）" hidden>在 Codex 打开 ↗</button>
+    <button id="stop" class="mini danger" hidden>停止</button>
+  </div>
+
+  <div class="logwrap">
+    <main class="log" id="log"></main>
+    <aside class="drawer" id="drawer" hidden>
+      <div class="drawer-head"><b id="drawer-title">闲聊会话</b><span>点击切换 · 双击改名</span></div>
+      <ul id="conv-list"></ul>
+    </aside>
+  </div>
+
+  <form class="compose" id="compose">
+    <textarea id="input" rows="1" maxlength="8000"></textarea>
+    <button id="send" type="submit" title="发送（Enter）"><svg viewBox="0 0 16 16"><path d="M2 8l12-5-4 12-2-5z" fill="currentColor"/></svg></button>
+  </form>
+</div>
+<div id="toast" class="toast"></div>
+<script type="module" src="./card.js"></script>
+</body>
+</html>
